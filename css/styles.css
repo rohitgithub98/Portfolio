@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid red;
+    /*border: 1px solid red;
     /* Temporarily see element boundaries */
 }
 
@@ -55,6 +55,7 @@ nav .container {
     align-items: center;
     width: 100%;
     /* Adjust container width if needed */
+    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -81,6 +82,7 @@ nav .logo a {
     /* Prevents text from wrapping */
 }
 
+
 nav .logo a:hover {
     opacity: 0.8;
     transform: scale(1.1);
@@ -91,8 +93,6 @@ nav .nav-links {
     display: flex;
     margin-right: 20px;
     /* Adds space between the logo and the nav links */
-    overflow: hidden;
-    /* Hide overflowing elements */
 }
 
 nav .nav-links li {
@@ -134,42 +134,54 @@ nav .burger div {
     transition: all 0.3s ease;
 }
 
-/* Responsive adjustments */
+/* Show the navigation menu on click */
+.nav-active {
+    transform: translateX(0%);
+}
+
+/* Burger animation to close icon */
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.toggle .line2 {
+    opacity: 0;
+}
+
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Ensuring the navigation links are visible and properly spaced */
 @media (max-width: 768px) {
     nav .nav-links {
+        display: flex;
         position: fixed;
-        top: 0;
         right: 0;
-        width: 100%;
-        /* Take the full viewport width */
         height: 100vh;
-        /* Full viewport height */
-        background-color: rgba(33, 37, 41, 0.95);
-        /* Slightly darker to stand out */
+        top: 0;
+        background-color: rgba(33, 37, 41, 0.9);
+        /* Consistent with the navbar color */
         flex-direction: column;
-        /* Stack links vertically */
-        justify-content: center;
-        /* Center links vertically */
+        align-items: center;
+        width: 100%;
+        /* Full width */
         transform: translateX(100%);
-        /* Start off-screen to the right */
-        transition: transform 0.3s ease-in-out;
-        visibility: hidden;
-        /* Hide by default */
+        transition: transform 0.5s ease-in;
+    }
+
+    nav .nav-links li {
+        margin: 20px 0;
     }
 
     nav .burger {
         display: block;
         position: absolute;
         right: 20px;
-    }
-
-    /* When nav-active class is added via JS */
-    .nav-active {
-        transform: translateX(0);
-        visibility: visible;
-        /* Make visible when active */
+        /* Align right within the navbar */
     }
 }
+
 
 
 
