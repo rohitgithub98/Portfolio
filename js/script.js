@@ -151,8 +151,13 @@ function handleScroll() {
 window.addEventListener('scroll', handleScroll);
 
 // Initial check to show items already in view on page load
-document.addEventListener('DOMContentLoaded', handleScroll);
+document.addEventListener('DOMContentLoaded', function () {
+    const burger = document.querySelector('.burger');
+    const navLinks = document.querySelector('.nav-links');
 
-
-
+    burger.addEventListener('click', function () {
+        navLinks.classList.toggle('nav-active'); // Toggle visibility and position
+        burger.classList.toggle('toggle'); // Toggle burger animation
+    });
+});
 
