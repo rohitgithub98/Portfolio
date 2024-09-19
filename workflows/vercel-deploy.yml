@@ -1,0 +1,27 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main  # Set this to your default branch (typically 'main' or 'master')
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout the code from your repository
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'  # Vercel uses Node.js for build processes
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel  # Install the Vercel CLI globally
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  # Secret for Vercel authentication
+        run: vercel --prod  # Deploy your project to Vercel in production mode

@@ -5,7 +5,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border: 1px solid red;
+    /* Temporarily see element boundaries */
 }
+
 
 /* Global Styles */
 body {
@@ -15,11 +18,23 @@ body {
     background-color: #f6f5f3;
 }
 
+body,
+html {
+    width: 100%;
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    position: relative;
+    /* Ensures positioning context */
+}
+
+
 /* Container */
 .container {
-    width: 90%;
+    width: 95%;
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
+    padding: 0 10px;
+    /* Add padding to prevent edge-to-edge content display */
 }
 
 /* Navigation Bar */
@@ -30,7 +45,7 @@ nav {
     /* Glassy blur effect */
     position: fixed;
     top: 0;
-    z-index: 999;
+    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -38,9 +53,8 @@ nav .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    width: 100%;
     /* Adjust container width if needed */
-    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -67,7 +81,6 @@ nav .logo a {
     /* Prevents text from wrapping */
 }
 
-
 nav .logo a:hover {
     opacity: 0.8;
     transform: scale(1.1);
@@ -78,6 +91,8 @@ nav .nav-links {
     display: flex;
     margin-right: 20px;
     /* Adds space between the logo and the nav links */
+    overflow: hidden;
+    /* Hide overflowing elements */
 }
 
 nav .nav-links li {
@@ -119,29 +134,46 @@ nav .burger div {
     transition: all 0.3s ease;
 }
 
-/* Responsive Navbar */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     nav .nav-links {
-        position: absolute;
-        right: 0;
-        height: 100vh;
+        position: fixed;
         top: 0;
-        background-color: rgba(33, 37, 41, 0.9);
+        right: 0;
+        width: 100%;
+        /* Take the full viewport width */
+        height: 100vh;
+        /* Full viewport height */
+        background-color: rgba(33, 37, 41, 0.95);
+        /* Slightly darker to stand out */
         flex-direction: column;
-        align-items: center;
-        width: 50%;
+        /* Stack links vertically */
+        justify-content: center;
+        /* Center links vertically */
         transform: translateX(100%);
-        transition: transform 0.5s ease-in;
-    }
-
-    nav .nav-links li {
-        margin: 50px 0;
+        /* Start off-screen to the right */
+        transition: transform 0.3s ease-in-out;
+        visibility: hidden;
+        /* Hide by default */
     }
 
     nav .burger {
         display: block;
+        position: absolute;
+        right: 20px;
+    }
+
+    /* When nav-active class is added via JS */
+    .nav-active {
+        transform: translateX(0);
+        visibility: visible;
+        /* Make visible when active */
     }
 }
+
+
+
+
 
 
 
@@ -539,20 +571,24 @@ section h3 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .experience-timeline {
-        padding-left: 0;
-    }
-
-    .experience-item {
-        padding-left: 20px;
+    .experience-timeline::before {
+        left: 20px;
+        /* Closer to the edge for visibility */
     }
 
     .experience-item::before {
-        left: -25px;
+        left: 0px;
+        /* Adjust marker position to align with the line */
     }
 
-    .company-logo {
-        width: 30px;
+    .experience-item {
+        padding-left: 40px;
+        /* Give space for the timeline marker */
+    }
+
+    .experience-content {
+        padding-left: 20px;
+        /* Reduce padding for content on smaller screens */
     }
 }
 
